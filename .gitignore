@@ -1,0 +1,23 @@
+# Compiled binaries
+fileWrite
+fileAppend
+client
+server
+clientIPv4
+serverIPv4
+clientIPv6
+serverIPv6
+
+# Test files
+test.txt
+*.log
+
+# Socket files
+*.sock
+/tmp/
+
+# Editor / OS
+.vscode/
+*.swp
+*~
+.DS_Store
