@@ -1,4 +1,4 @@
-# IPv6 & IoT — Lab 10: TCP Sockets
+# IPv6_Predzadanie
 
 Lab assignment implementing BSD sockets in C — from UNIX local sockets up to TCP/IPv6.
 
