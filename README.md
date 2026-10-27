@@ -1,51 +1,64 @@
+<div align="center">
+
 # IPv6_Predzadanie
 
-Lab assignment implementing BSD sockets in C — from UNIX local sockets up to TCP/IPv6.
+**BSD sockets in C: from file I/O and UNIX sockets to TCP over IPv4 and IPv6**
+
+Lab 10 of *IPv6 & IoT*. Echo client and server where the server sends back the message in uppercase.
+
+![C](https://img.shields.io/badge/C-gcc-A8B9CC?logo=c&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-POSIX%20sockets-lightgrey?logo=linux&logoColor=white)
+
+</div>
 
 ## Programs
 
-| Executable | Source | Description |
+| Binary | Source | What it does |
 |---|---|---|
-| `fileWrite` | `fileWrite.c` | Write string to file (low-level `open/write/close`) |
-| `fileAppend` | `fileAppend.c` | Append string with random prefix to file |
-| `client` | `echoClient.c` | Echo client via UNIX local socket |
-| `server` | `echoServer.c` | Echo server via UNIX local socket |
-| `clientIPv4` | `echoClientIPv4.c` | Echo client via TCP/IPv4 (port 5000) |
-| `serverIPv4` | `echoServerIPv4.c` | Echo server via TCP/IPv4 (port 5000) |
-| `clientIPv6` | `echoClientIPv6.c` | Echo client via TCP/IPv6 (port 5000) |
-| `serverIPv6` | `echoServerIPv6.c` | Echo server via TCP/IPv6 (port 5000) |
+| `fileWrite` | [`fileWrite.c`](fileWrite.c) | Writes a string to a file with `open`/`write`/`close` |
+| `fileAppend` | [`fileAppend.c`](fileAppend.c) | Appends a string with a random prefix to a file |
+| `server`, `client` | [`echoServer.c`](echoServer.c), [`echoClient.c`](echoClient.c) | Echo over a UNIX local socket |
+| `serverIPv4`, `clientIPv4` | [`echoServerIPv4.c`](echoServerIPv4.c), [`echoClientIPv4.c`](echoClientIPv4.c) | Echo over TCP/IPv4, port 5000 |
+| `serverIPv6`, `clientIPv6` | [`echoServerIPv6.c`](echoServerIPv6.c), [`echoClientIPv6.c`](echoClientIPv6.c) | Echo over TCP/IPv6, port 5000 |
+
+[`settings.h`](settings.h) holds the shared constants and the `_runSafe` macro that checks every system call. The assignment text is in [`1_Extra.pdf`](1_Extra.pdf).
 
 ## Build
 
-```bash
-gcc -Wall -o fileWrite fileWrite.c
-gcc -Wall -o fileAppend fileAppend.c
-gcc -Wall -o client echoClient.c
-gcc -Wall -o server echoServer.c
-gcc -Wall -o clientIPv4 echoClientIPv4.c
-gcc -Wall -o serverIPv4 echoServerIPv4.c
-gcc -Wall -o clientIPv6 echoClientIPv6.c
-gcc -Wall -o serverIPv6 echoServerIPv6.c
+Needs gcc on Linux.
+
+```sh
+for p in fileWrite fileAppend; do gcc -Wall -o $p $p.c; done
+gcc -Wall -o server echoServer.c && gcc -Wall -o client echoClient.c
+gcc -Wall -o serverIPv4 echoServerIPv4.c && gcc -Wall -o clientIPv4 echoClientIPv4.c
+gcc -Wall -o serverIPv6 echoServerIPv6.c && gcc -Wall -o clientIPv6 echoClientIPv6.c
 ```
 
-## Usage
+## Run
 
-**UNIX local socket** (two terminals):
-```bash
-./server /tmp/mysock       # terminal 1
-./client /tmp/mysock       # terminal 2
+Start the server in one terminal and the client in another. The client sends a lowercase message and prints the uppercase reply.
+
+```sh
+./server /tmp/mysock        # UNIX socket
+./client /tmp/mysock
 ```
 
-**IPv4** (two terminals):
-```bash
-./serverIPv4 127.0.0.1    # terminal 1
-./clientIPv4 127.0.0.1    # terminal 2
+```sh
+./serverIPv4 127.0.0.1      # IPv4, port 5000
+./clientIPv4 127.0.0.1
 ```
 
-**IPv6** (two terminals):
-```bash
-./serverIPv6 ::1          # terminal 1
-./clientIPv6 ::1          # terminal 2
+```sh
+./serverIPv6 ::1            # IPv6, port 5000
+./clientIPv6 ::1
 ```
 
-The server converts the client's lowercase message to uppercase and sends it back.
+The file programs take a file name and a message:
+
+```sh
+./fileWrite out.txt "hello"
+./fileAppend out.txt "hello"
+```
+
+> [!NOTE]
+> `1_Extra.pdf` is course material by Tomas Palenik, marked for lab use only. Keep this repository private or remove the PDF before publishing it.
