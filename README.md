@@ -6,10 +6,15 @@
 
 Lab 10 of *IPv6 & IoT*. Echo client and server where the server sends back the message in uppercase.
 
-![C](https://img.shields.io/badge/C-gcc-A8B9CC?logo=c&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-POSIX%20sockets-lightgrey?logo=linux&logoColor=white)
+[![Build](https://img.shields.io/github/actions/workflow/status/dmitthedazed/IPv6_Predzadanie/build.yml?style=flat-square&label=Build)](https://github.com/dmitthedazed/IPv6_Predzadanie/actions/workflows/build.yml)
+![C](https://img.shields.io/badge/C-gcc-A8B9CC?logo=c&logoColor=white&style=flat-square)
+![Linux](https://img.shields.io/badge/Linux-POSIX%20sockets-lightgrey?logo=linux&logoColor=white&style=flat-square)
+[![License: MIT](https://img.shields.io/badge/License-MIT-lightgrey?style=flat-square)](LICENSE)
 
 </div>
+
+> [!NOTE]
+> Archived. The course is over, so this repository is read-only and kept for reference.
 
 ## Programs
 
@@ -21,7 +26,7 @@ Lab 10 of *IPv6 & IoT*. Echo client and server where the server sends back the m
 | `serverIPv4`, `clientIPv4` | [`echoServerIPv4.c`](echoServerIPv4.c), [`echoClientIPv4.c`](echoClientIPv4.c) | Echo over TCP/IPv4, port 5000 |
 | `serverIPv6`, `clientIPv6` | [`echoServerIPv6.c`](echoServerIPv6.c), [`echoClientIPv6.c`](echoClientIPv6.c) | Echo over TCP/IPv6, port 5000 |
 
-[`settings.h`](settings.h) holds the shared constants and the `_runSafe` macro that checks every system call. The assignment text is in [`1_Extra.pdf`](1_Extra.pdf).
+[`settings.h`](settings.h) holds the shared constants and the `_runSafe` macro that checks every system call. The assignment text belongs to the course and isn't included.
 
 ## Build
 
@@ -60,5 +65,6 @@ The file programs take a file name and a message:
 ./fileAppend out.txt "hello"
 ```
 
-> [!NOTE]
-> `1_Extra.pdf` is course material by Tomas Palenik, marked for lab use only. Keep this repository private or remove the PDF before publishing it.
+## License
+
+[MIT](LICENSE) © Dmytrii Savin

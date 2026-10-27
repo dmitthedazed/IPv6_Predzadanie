@@ -1,0 +1,23 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile
+        run: |
+          for p in fileWrite fileAppend; do gcc -Wall -Werror -o $p $p.c; done
+          gcc -Wall -Werror -o server echoServer.c && gcc -Wall -Werror -o client echoClient.c
+          gcc -Wall -Werror -o serverIPv4 echoServerIPv4.c && gcc -Wall -Werror -o clientIPv4 echoClientIPv4.c
+          gcc -Wall -Werror -o serverIPv6 echoServerIPv6.c && gcc -Wall -Werror -o clientIPv6 echoClientIPv6.c
+      - name: Echo over IPv4 and IPv6
+        run: |
+          (timeout 5 ./serverIPv4 127.0.0.1 &) ; sleep 1
+          ./clientIPv4 127.0.0.1 | grep -q 'HELLO'
+          (timeout 5 ./serverIPv6 ::1 &) ; sleep 1
+          ./clientIPv6 ::1 | grep -q 'HELLO'
